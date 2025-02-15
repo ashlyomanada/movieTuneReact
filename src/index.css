@@ -1,0 +1,12 @@
+#carouselExampleIndicators {
+  height: 100vh;
+  /* width: 100vw; */
+}
+
+.bgBlack {
+  background-color: black;
+}
+
+.bgNone {
+  background-color: transparent;
+}
