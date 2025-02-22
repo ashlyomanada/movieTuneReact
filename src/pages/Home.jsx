@@ -76,13 +76,13 @@ function Home() {
         style={{ background: "black" }}
       >
         <form
-          className="d-flex gap-2 align-items-center justify-content-center"
+          className="flex flex-wrap gap-2 align-items-center justify-content-center"
           onSubmit={handleSearch}
           style={{ paddingTop: "20vh" }}
         >
           <input
             type="text"
-            className="form-control w-auto"
+            className="p-2 w-auto rounded-md"
             placeholder="Search for movies..."
             onChange={handleInput}
             value={searchQuery}
