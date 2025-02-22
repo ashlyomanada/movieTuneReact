@@ -4,10 +4,9 @@ const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.d
 const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?&api_key=${APIKEY}&query=`;
 
 export async function getPopularMovies() {
-  const response = await fetch(APIURL); // Wait for the fetch to complete
-  const data = await response.json(); // Wait for the JSON parsing to complete
-  const movies = data.results; // Extract the movies array from the results
-  //   console.log(movies);
+  const response = await fetch(APIURL);
+  const data = await response.json();
+  const movies = data.results;
   return movies;
 }
 
@@ -21,10 +20,9 @@ export async function searchMovies(searchQuery) {
 
 export async function getNowPlaying() {
   const response = await fetch(
-    `https://express-api-two-taupe.vercel.app/api/v1/movies/now_playing`
+    `https://express-api-two-taupe.vercel.app/api/v1/movies/popular`
   );
   const data = await response.json();
-  // console.log(data);
   return data;
 }
 
@@ -33,6 +31,5 @@ export async function getSelectedMovieDetails(selectedMovieId) {
     `https://express-api-two-taupe.vercel.app/api/v1/movies/${selectedMovieId}`
   );
   const data = await response.json();
-
   return data;
 }

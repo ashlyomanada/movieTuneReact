@@ -25,57 +25,76 @@ const MovieDetails = ({ selectedDetails, closeModal }) => {
 
   return (
     <>
-      <div className="showMovieInfoContainer">
-        <div className="movieBackdropContaiiner">
-          <div className="selectedMovieInnfo">
-            <h3>{selectedDetails.title}</h3>
-            <p>{selectedDetails.overview}</p>
-            <p>Released: {selectedDetails.release_date}</p>
-            <p>
-              Rating:{" "}
-              <span className={getVoteColor(selectedDetails.vote_average)}>
-                {selectedDetails.vote_average.toFixed(2)}
-              </span>
-            </p>
-            {selectedDetails.streaming_site_1 ? (
-              <select
-                className="form-control w-auto"
-                value={selectedServer}
-                onChange={(e) => setSelectedServer(e.target.value)}
-              >
-                <option value={selectedDetails.streaming_site_1}>
-                  Server 1
-                </option>
-                {selectedDetails.streaming_site_2 && (
-                  <option value={selectedDetails.streaming_site_2}>
-                    Server 2
+      <div
+        className="h-screen w-screen flex justify-center fixed z-50 top-0 left-0 bg-black text-white "
+        style={{
+          background: `url(https://image.tmdb.org/t/p/w1280${selectedDetails.backdrop_path})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div
+          className="flex justify-center flex-col lg:flex-row"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
+          <div className="hidden lg:w-1/4 p-5 lg:flex items-center justify-center">
+            <img
+              className=" md:h-96 lg:flex object-contain"
+              src={`https://image.tmdb.org/t/p/w1280${selectedDetails.poster_path}`}
+              alt={selectedDetails.title}
+            />
+          </div>
+
+          <div className="lg:w-1/2 flex items-center justify-center ">
+            <div className="h-full p-3 md:p-5 flex flex-col gap-2 justify-center">
+              <h3>{selectedDetails.title}</h3>
+              <p className="text-justify">{selectedDetails.overview}</p>
+              <p>Released: {selectedDetails.release_date}</p>
+              <p>
+                Rating:
+                <span className={getVoteColor(selectedDetails.vote_average)}>
+                  {selectedDetails.vote_average.toFixed(2)}
+                </span>
+              </p>
+              {selectedDetails.streaming_site_1 ? (
+                <select
+                  className="form-control flex self-start w-auto"
+                  value={selectedServer}
+                  onChange={(e) => setSelectedServer(e.target.value)}
+                >
+                  <option value={selectedDetails.streaming_site_1}>
+                    Server 1
                   </option>
-                )}
-                {selectedDetails.streaming_site_3 && (
-                  <option value={selectedDetails.streaming_site_3}>
-                    Server 3
-                  </option>
-                )}
-              </select>
-            ) : (
-              <h5>No Server Found</h5>
-            )}
-            <div className="btnContainers">
-              {selectedDetails.streaming_site_1 && (
-                <button className="signBtn" onClick={handleSelectedPlay}>
-                  Watch Movie
-                </button>
+                  {selectedDetails.streaming_site_2 && (
+                    <option value={selectedDetails.streaming_site_2}>
+                      Server 2
+                    </option>
+                  )}
+                  {selectedDetails.streaming_site_3 && (
+                    <option value={selectedDetails.streaming_site_3}>
+                      Server 3
+                    </option>
+                  )}
+                </select>
+              ) : (
+                <h5>No Server Found</h5>
               )}
-              <button className="closeBtn" onClick={closeModal}>
-                Close
-              </button>
+              <div className="btnContainers">
+                {selectedDetails.streaming_site_1 && (
+                  <button className="signBtn" onClick={handleSelectedPlay}>
+                    Watch Movie
+                  </button>
+                )}
+                <button
+                  className="closeBtn bg-white text-black"
+                  onClick={closeModal}
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-          <img
-            className="showedImage"
-            src={`https://image.tmdb.org/t/p/w1280${selectedDetails.backdrop_path}`}
-            alt={selectedDetails.title}
-          />
         </div>
       </div>
 

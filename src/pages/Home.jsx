@@ -10,6 +10,7 @@ function Home() {
   const [randomImage, setRandomImage] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+  const [debounceTimer, setDebounceTimer] = useState(null); // Debounce timer state
 
   useEffect(() => {
     const getMovies = async () => {
@@ -30,26 +31,50 @@ function Home() {
     getMovies();
   }, []);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    const response = await searchMovies(searchQuery);
-    setMovies(response);
-    setIsSearch(true);
-  };
-
   const handleInput = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
-    if (value.trim() === "") {
-      setMovies(trendingMovies);
-      setIsSearch(false);
+
+    if (debounceTimer) clearTimeout(debounceTimer); // Clear previous timer
+
+    const newTimer = setTimeout(async () => {
+      if (value.trim() === "") {
+        setMovies(trendingMovies);
+        setIsSearch(false);
+      } else {
+        try {
+          const response = await searchMovies(value);
+          setMovies(response);
+          setIsSearch(true);
+        } catch (error) {
+          console.error("Search failed:", error);
+        }
+      }
+    }, 500); // 500ms debounce delay
+
+    setDebounceTimer(newTimer); // Set new timer
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (debounceTimer) clearTimeout(debounceTimer); // Ensure no pending debounce call
+    try {
+      const response = await searchMovies(searchQuery);
+      setMovies(response);
+      setIsSearch(true);
+    } catch (error) {
+      console.error("Search failed:", error);
     }
   };
 
   return (
     <>
       <LandingPage randomImage={randomImage} />
-      <div className="container-fluid" style={{ background: "black" }}>
+      <div
+        id="moviesSection"
+        className="container-fluid position-relative"
+        style={{ background: "black" }}
+      >
         <form
           className="d-flex gap-2 align-items-center justify-content-center"
           onSubmit={handleSearch}
@@ -57,27 +82,27 @@ function Home() {
         >
           <input
             type="text"
-            className="form-control w-50"
+            className="form-control w-auto"
             placeholder="Search for movies..."
             onChange={handleInput}
             value={searchQuery}
-            required
           />
           <button type="submit" className="signBtn">
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
-        <div>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <MovieCard
-              movies={movies}
-              isSearch={isSearch}
-              searchQuery={searchQuery}
-            />
-          )}
-        </div>
+
+        {loading ? (
+          <div id="loaderSection" className="loader-container">
+            <div className="loader"></div>
+          </div>
+        ) : (
+          <MovieCard
+            movies={movies}
+            isSearch={isSearch}
+            searchQuery={searchQuery}
+          />
+        )}
       </div>
     </>
   );
