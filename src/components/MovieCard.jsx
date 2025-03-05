@@ -53,14 +53,16 @@ function MovieCard({ movies, isSearch, searchQuery }) {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 md:grid-cols-6 md:px-10 lg:grid-cols-7 lg:px-20 place-items-center">
             {movies.map((movie, index) => (
               <div
-                className="flex flex-col gap-2"
+                className="flex flex-col gap-2 w-full"
                 key={`${movie.id}-${index}`} // Combine id and index for uniqueness
                 onClick={() => handleSelectedMovie(movie)}
               >
                 <div className="flex justify-center">
-                  {!imageLoaded[movie.id] && <div className="loader2"></div>}
+                  {!imageLoaded[movie.id] && (
+                    <div className="skeleton aspect-[2/3] w-full"></div>
+                  )}
                   <img
-                    className="object-contain"
+                    className="aspect-[2/3] object-contain"
                     src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
                     alt={movie.title}
                     onLoad={() => handleImageLoad(movie.id)}
@@ -69,7 +71,7 @@ function MovieCard({ movies, isSearch, searchQuery }) {
                     }}
                   />
                 </div>
-                <div className="text-center flex flex-col items-center justify-center h-20">
+                <div className="text-center flex flex-col items-stretch justify-center h-20">
                   <h5 className="title">{movie.title}</h5>
                 </div>
               </div>

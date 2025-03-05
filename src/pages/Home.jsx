@@ -1,7 +1,8 @@
 import MovieCard from "../components/MovieCard";
-import { getPopularMovies, searchMovies, getNowPlaying } from "../services/Api";
+import { searchMovies, getNowPlaying } from "../services/Api";
 import { useEffect, useState } from "react";
 import LandingPage from "../components/LandingPage";
+import Navbar from "../components/Navbar";
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -69,41 +70,50 @@ function Home() {
 
   return (
     <>
-      <LandingPage randomImage={randomImage} />
-      <div
-        id="moviesSection"
-        className="container-fluid position-relative"
-        style={{ background: "black" }}
-      >
-        <form
-          className="flex flex-wrap gap-2 align-items-center justify-content-center"
-          onSubmit={handleSearch}
-          style={{ paddingTop: "20vh" }}
-        >
-          <input
-            type="text"
-            className="p-2 w-auto rounded-md"
-            placeholder="Search for movies..."
-            onChange={handleInput}
-            value={searchQuery}
-          />
-          <button type="submit" className="signBtn">
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
+      <Navbar />
+      {loading ? (
+        <div id="loaderSection" className="loader-container">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <>
+          <LandingPage randomImage={randomImage} />
+          <div
+            id="moviesSection"
+            className="container-fluid position-relative"
+            style={{ background: "black" }}
+          >
+            <form
+              className="flex flex-wrap gap-2 align-items-center justify-content-center"
+              onSubmit={handleSearch}
+              style={{ paddingTop: "20vh" }}
+            >
+              <input
+                type="text"
+                className="p-2 w-auto rounded-md bg-white"
+                placeholder="Search for movies..."
+                onChange={handleInput}
+                value={searchQuery}
+              />
+              <button type="submit" className="signBtn">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
 
-        {loading ? (
-          <div id="loaderSection" className="loader-container">
-            <div className="loader"></div>
+            {loading ? (
+              <div id="loaderSection" className="loader-container">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <MovieCard
+                movies={movies}
+                isSearch={isSearch}
+                searchQuery={searchQuery}
+              />
+            )}
           </div>
-        ) : (
-          <MovieCard
-            movies={movies}
-            isSearch={isSearch}
-            searchQuery={searchQuery}
-          />
-        )}
-      </div>
+        </>
+      )}
     </>
   );
 }

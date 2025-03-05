@@ -71,7 +71,7 @@ const LandingPage = ({ randomImage }) => {
               </div>
               <img
                 src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`} // Replace `imageUrl` with the correct property name from your API
-                className="d-block w-100"
+                className="d-block w-screen"
                 alt={movie.title || "Movie"}
                 style={{ height: "100vh", objectFit: "cover" }}
               />

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false); // Fixed typo from 'setIsIcrolled' to 'setIsScrolled'
   const [isNavShow, setIsNavShow] = useState(true);
+  const location = useLocation();
 
   const toggleNav = () => {
     setIsNavShow(!isNavShow);
@@ -49,24 +51,44 @@ const Navbar = () => {
           }}
         >
           <li>
-            <a className="anchor" href="#carouselExampleIndicators">
+            <Link
+              className={`${
+                location.pathname === "/" ? "border-b-4" : " "
+              } anchor border-orange-600 `}
+              to="/"
+            >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="anchor" href="#moviesSection">
-              Trending
-            </a>
+            <Link
+              className={`${
+                location.pathname === "/movies/popular" ? "border-b-4" : " "
+              } anchor border-orange-600 `}
+              to="/movies/popular"
+            >
+              Popular
+            </Link>
           </li>
           <li>
-            <a className="anchor" href="#">
+            <Link
+              className={`${
+                location.pathname === "/movies/topRated" ? "border-b-4" : " "
+              } anchor border-orange-600 `}
+              to="/movies/topRated"
+            >
               Movies
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="anchor" href="#">
+            <Link
+              className={`${
+                location.pathname === "#" ? "border-b-4" : " "
+              } anchor border-orange-600 `}
+              to="#"
+            >
               Newsletter
-            </a>
+            </Link>
           </li>
         </ul>
 
