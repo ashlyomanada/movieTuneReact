@@ -90,7 +90,7 @@ const Details = () => {
               <option value="server3">Server 3</option>
             </select>
 
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center pb-5">
               <Link
                 to={`/movies/watch/${details.id}/${server}`}
                 className="py-2 px-4 mt-4 rounded-md bg-orange-600 no-underline text-white"
