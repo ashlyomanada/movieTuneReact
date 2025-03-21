@@ -81,7 +81,7 @@ const Details = () => {
             </div>
 
             <select
-              className="py-2 px-4 mt-4 rounded-md"
+              className="py-2 px-4 mt-4 rounded-md text-white bg-[#1f1f1f]"
               value={server}
               onChange={(e) => setServer(e.target.value)}
             >
