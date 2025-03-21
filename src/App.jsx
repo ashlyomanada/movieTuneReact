@@ -1,23 +1,27 @@
 import Home from "./pages/Home";
 import "./App.css";
-import GptLayout from "./pages/GptLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Movies from "./pages/Movies";
 import Popular from "./pages/Popular";
 import Details from "./pages/Details";
+import Watch from "./pages/Watch";
+import FavoritePage from "./pages/FavoritePage";
+
 function App() {
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies/popular" element={<Popular />} />
-          <Route path="/movies/topRated" element={<Movies />} />
+          <Route path="/movies/top-rated" element={<Movies />} />
           <Route path="/movies/details/:id" element={<Details />} />
+          <Route path="/movies/watch/:id/:server" element={<Watch />} />
+          <Route path="/movies/favorites" element={<FavoritePage />} />
         </Routes>
       </Router>
-
-      {/* <GptLayout /> */}
     </>
   );
 }

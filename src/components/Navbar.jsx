@@ -73,9 +73,9 @@ const Navbar = () => {
           <li>
             <Link
               className={`${
-                location.pathname === "/movies/topRated" ? "border-b-4" : " "
+                location.pathname === "/movies/top-rated" ? "border-b-4" : " "
               } anchor border-orange-600 `}
-              to="/movies/topRated"
+              to="/movies/top-rated"
             >
               Movies
             </Link>
@@ -83,11 +83,11 @@ const Navbar = () => {
           <li>
             <Link
               className={`${
-                location.pathname === "#" ? "border-b-4" : " "
+                location.pathname === "/movies/favorites" ? "border-b-4" : " "
               } anchor border-orange-600 `}
-              to="#"
+              to="/movies/favorites"
             >
-              Newsletter
+              Favorites
             </Link>
           </li>
         </ul>

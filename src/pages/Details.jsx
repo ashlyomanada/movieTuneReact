@@ -8,6 +8,7 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [server, setServer] = useState("server2");
 
   const fetchMovieDetails = async () => {
     try {
@@ -18,6 +19,12 @@ const Details = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const getVoteColor = (vote) => {
+    if (vote > 8) return "text-green-300";
+    if (vote >= 5) return "text-orange-300";
+    return "red";
   };
 
   useEffect(() => {
@@ -35,20 +42,32 @@ const Details = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="min-h-screen bg-[rgba(0,0,0,0.5)] flex">
-        <div className="flex flex-col  lg:flex-row justify-center items-center md:gap-4">
-          <div className="w-full md:flex md:justify-center lg:w-auto p-3">
+      <div className="min-h-screen bg-[rgba(0,0,0,0.5)] flex justify-center">
+        <div className="flex flex-col lg:flex-row justify-center items-center md:gap-4">
+          <div className="hidden w-full lg:flex justify-center lg:w-auto p-3">
             <img
               src={`https://image.tmdb.org/t/p/w1280${details.poster_path}`}
               alt=""
               className="flex justify-self-start h-52 md:h-96 object-contain"
             />
           </div>
-          <div className=" text-white flex flex-col items-start w-full p-3 md:p-0 md:w-2/3">
+          <div className="w-full flex justify-center lg:hidden lg:w-auto p-3">
+            <img
+              src={`https://image.tmdb.org/t/p/w1280${details.backdrop_path}`}
+              alt=""
+              className="flex justify-self-start h-52 md:h-96 object-contain"
+            />
+          </div>
+          <div className="text-white flex flex-col items-start w-full px-3 lg:px-0 lg:w-2/3">
             <h1>{details.title}</h1>
             <p>Overview : {details.overview}</p>
             <p>Release Date : {details.release_date}</p>
-            <p>Vote Average : {details.vote_average}</p>
+            <p>
+              Vote Average :{" "}
+              <span className={getVoteColor(details.vote_average)}>
+                {details.vote_average}
+              </span>
+            </p>
             <div className="flex gap-3 flex-wrap">
               {details.genres.length > 0 &&
                 details.genres.map((genre) => (
@@ -61,16 +80,23 @@ const Details = () => {
                 ))}
             </div>
 
-            <select className="py-2 px-4 mt-4 rounded-md" name="" id="">
-              <option value={details.streaming_site_1}>Server 1</option>
-              <option value={details.streaming_site_2}>Server 2</option>
-              <option value={details.streaming_site_3}>Server 3</option>
+            <select
+              className="py-2 px-4 mt-4 rounded-md"
+              value={server}
+              onChange={(e) => setServer(e.target.value)}
+            >
+              <option value="server1">Server 1</option>
+              <option value="server2">Server 2</option>
+              <option value="server3">Server 3</option>
             </select>
 
             <div className="flex gap-2 items-center">
-              <button className="py-2 px-4 mt-4 rounded-md bg-orange-600">
+              <Link
+                to={`/movies/watch/${details.id}/${server}`}
+                className="py-2 px-4 mt-4 rounded-md bg-orange-600 no-underline text-white"
+              >
                 Play Now
-              </button>
+              </Link>
 
               <button
                 className="py-2 px-4 mt-4 rounded-md bg-[#1f1f1f]"
