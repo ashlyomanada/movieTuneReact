@@ -11,7 +11,7 @@ function Home() {
   const [randomImage, setRandomImage] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearch, setIsSearch] = useState(false);
-  const [debounceTimer, setDebounceTimer] = useState(null); // Debounce timer state
+  const [debounceTimer, setDebounceTimer] = useState(null);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -19,12 +19,8 @@ function Home() {
         const response = await getNowPlaying();
         setMovies(response);
         setTrendingMovies(response);
-        const first10Movies = response.slice(0, 5);
-        const shuffledMovies = [...first10Movies].sort(
-          () => 0.5 - Math.random()
-        );
-        const randomMovies = shuffledMovies.slice(0, 3);
-        setRandomImage(randomMovies);
+        const first3Movies = response.slice(0, 3);
+        setRandomImage(first3Movies);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
       } finally {
@@ -36,10 +32,11 @@ function Home() {
   }, []);
 
   const handleInput = (e) => {
+    e.preventDefault();
     const value = e.target.value;
     setSearchQuery(value);
 
-    if (debounceTimer) clearTimeout(debounceTimer); // Clear previous timer
+    if (debounceTimer) clearTimeout(debounceTimer);
 
     const newTimer = setTimeout(async () => {
       if (value.trim() === "") {
@@ -54,21 +51,9 @@ function Home() {
           console.error("Search failed:", error);
         }
       }
-    }, 500); // 500ms debounce delay
+    }, 500);
 
-    setDebounceTimer(newTimer); // Set new timer
-  };
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (debounceTimer) clearTimeout(debounceTimer); // Ensure no pending debounce call
-    try {
-      const response = await searchMovies(searchQuery);
-      setMovies(response);
-      setIsSearch(true);
-    } catch (error) {
-      console.error("Search failed:", error);
-    }
+    setDebounceTimer(newTimer);
   };
 
   return (
@@ -86,10 +71,10 @@ function Home() {
             className="container-fluid position-relative"
             style={{ background: "black" }}
           >
-            <div className="flex justify-center  py-5">
+            <div className="flex justify-center py-5">
               <form
-                className="flex flex-wrap gap-2 align-items-stretch justify-content-center"
-                onSubmit={handleSearch}
+                className="flex flex-wrap gap-2 items-center justify-center"
+                onSubmit={handleInput}
               >
                 <input
                   type="text"
@@ -109,23 +94,23 @@ function Home() {
             </div>
 
             <div className="flex justify-center items-center py-3">
-              <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white lg:pb-4">
-                <i className="fa-solid fa-fire-flame-curved text-orange-600"></i>
-                Popular Movies
-              </h1>
+              {isSearch ? (
+                <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white lg:pb-4">
+                  Results for "{searchQuery}"
+                </h1>
+              ) : (
+                <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-2 items-center text-white lg:pb-4">
+                  <i className="fa-solid fa-fire-flame-curved text-orange-600"></i>
+                  Popular Movies
+                </h1>
+              )}
             </div>
 
-            {loading ? (
-              <div id="loaderSection" className="loader-container">
-                <div className="loader"></div>
-              </div>
-            ) : (
-              <MovieCard
-                movies={movies}
-                isSearch={isSearch}
-                searchQuery={searchQuery}
-              />
-            )}
+            <MovieCard
+              movies={movies}
+              isSearch={isSearch}
+              searchQuery={searchQuery}
+            />
           </div>
         </>
       )}
