@@ -10,6 +10,10 @@ const Navbar = () => {
     setIsNavShow(!isNavShow);
   };
 
+  const toggleLink = () => {
+    setIsNavShow(true);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const section = document.querySelector("#moviesSection");
@@ -56,6 +60,7 @@ const Navbar = () => {
                 location.pathname === "/" ? "border-b-4" : " "
               } anchor border-orange-600 `}
               to="/"
+              onClick={() => toggleLink()}
             >
               Home
             </Link>
@@ -66,6 +71,7 @@ const Navbar = () => {
                 location.pathname === "/movies/popular" ? "border-b-4" : " "
               } anchor border-orange-600 `}
               to="/movies/popular"
+              onClick={() => toggleLink()}
             >
               Popular
             </Link>
@@ -76,6 +82,7 @@ const Navbar = () => {
                 location.pathname === "/movies/top-rated" ? "border-b-4" : " "
               } anchor border-orange-600 `}
               to="/movies/top-rated"
+              onClick={() => toggleLink()}
             >
               Movies
             </Link>
@@ -86,6 +93,7 @@ const Navbar = () => {
                 location.pathname === "/movies/favorites" ? "border-b-4" : " "
               } anchor border-orange-600 `}
               to="/movies/favorites"
+              onClick={() => toggleLink()}
             >
               Favorites
             </Link>

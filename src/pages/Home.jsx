@@ -2,6 +2,7 @@ import MovieCard from "../components/MovieCard";
 import { searchMovies, getNowPlaying } from "../services/Api";
 import { useEffect, useState } from "react";
 import LandingPage from "../components/LandingPage";
+import Navbar from "../components/Navbar";
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -69,6 +70,7 @@ function Home() {
 
   return (
     <>
+      <Navbar />
       {loading ? (
         <div id="loaderSection" className="loader-container">
           <div className="loader"></div>
@@ -88,7 +90,7 @@ function Home() {
               >
                 <input
                   type="text"
-                  className="py-2 px-3 w-full md:w-auto rounded-md bg-white text-xl"
+                  className="py-2 px-3 w-[75%] md:w-auto rounded-md bg-white text-xl"
                   placeholder="Search for movies..."
                   onChange={handleInput}
                   value={searchQuery}

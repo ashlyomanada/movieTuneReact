@@ -22,7 +22,7 @@ const LandingPage = ({ randomImage }) => {
             ))}
           </div>
 
-          <div className="carousel-inner">
+          <div className="carousel-inner relative">
             {randomImage.map((movie, index) => (
               <div
                 key={index}
@@ -30,7 +30,7 @@ const LandingPage = ({ randomImage }) => {
                 style={{ transition: "transform 1s ease-in-out" }}
               >
                 <div className="movieInfo">
-                  <h1 className="movieTitle">{movie.title}</h1>
+                  <h1 className="text-3xl lg:text-4xl">{movie.title}</h1>
                   <Link
                     to={`/movies/details/${movie.id}`}
                     className="signBtn no-underline"

@@ -609,6 +609,10 @@ body {
   .signBtn {
     font-size: 0.8rem;
   }
+
+  .movieInfo {
+    width: 60%;
+  }
 }
 /* 
 @media screen and (max-width: 400px) {
