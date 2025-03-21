@@ -19,8 +19,11 @@ function Home() {
         const response = await getNowPlaying();
         setMovies(response);
         setTrendingMovies(response);
-        const shuffled = [...response].sort(() => 0.5 - Math.random());
-        const randomMovies = shuffled.slice(0, 3);
+        const first10Movies = response.slice(0, 5);
+        const shuffledMovies = [...first10Movies].sort(
+          () => 0.5 - Math.random()
+        );
+        const randomMovies = shuffledMovies.slice(0, 3);
         setRandomImage(randomMovies);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
@@ -90,7 +93,7 @@ function Home() {
               >
                 <input
                   type="text"
-                  className="py-2 px-3 w-[75%] md:w-auto rounded-md bg-white text-xl"
+                  className="py-2 px-3 w-[65%] md:w-auto rounded-md bg-white text-xl"
                   placeholder="Search for movies..."
                   onChange={handleInput}
                   value={searchQuery}
@@ -107,7 +110,7 @@ function Home() {
 
             <div className="flex justify-center items-center py-3">
               <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white lg:pb-4">
-                <i class="fa-solid fa-fire-flame-curved text-orange-600"></i>
+                <i className="fa-solid fa-fire-flame-curved text-orange-600"></i>
                 Popular Movies
               </h1>
             </div>
