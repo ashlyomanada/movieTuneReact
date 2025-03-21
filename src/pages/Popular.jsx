@@ -29,9 +29,9 @@ const Popular = () => {
             <div className="loader"></div>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-3 pt-3">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-              Popular Movies
+          <div className="flex flex-col items-center gap-3 pt-5">
+            <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center">
+              <i class="fa-solid fa-fire text-orange-600"></i> Popular Movies
             </h1>
             <Card movies={popularMovies} />
           </div>

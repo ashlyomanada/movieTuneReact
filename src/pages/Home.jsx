@@ -88,7 +88,7 @@ function Home() {
               >
                 <input
                   type="text"
-                  className="py-2 px-3 w-auto rounded-md bg-white text-xl"
+                  className="py-2 px-3 w-full md:w-auto rounded-md bg-white text-xl"
                   placeholder="Search for movies..."
                   onChange={handleInput}
                   value={searchQuery}
@@ -101,6 +101,13 @@ function Home() {
                   <span className="hidden md:flex">Search</span>
                 </button>
               </form>
+            </div>
+
+            <div className="flex justify-center items-center py-3">
+              <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white">
+                <i class="fa-solid fa-fire-flame-curved text-orange-600"></i>
+                Popular Movies
+              </h1>
             </div>
 
             {loading ? (
