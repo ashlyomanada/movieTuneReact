@@ -83,7 +83,7 @@ function Home() {
             className="container-fluid position-relative"
             style={{ background: "black" }}
           >
-            <div className="flex justify-center py-5">
+            <div className="flex justify-center  py-5">
               <form
                 className="flex flex-wrap gap-2 align-items-stretch justify-content-center"
                 onSubmit={handleSearch}
@@ -106,7 +106,7 @@ function Home() {
             </div>
 
             <div className="flex justify-center items-center py-3">
-              <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white">
+              <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center text-white lg:pb-4">
                 <i class="fa-solid fa-fire-flame-curved text-orange-600"></i>
                 Popular Movies
               </h1>

@@ -68,7 +68,8 @@ const Card = ({ movies }) => {
       ) : (
         <div className="flex justify-center items-center h-screen w-full">
           <h1 className="text-white text-xl md:text-2xl lg:text-3xl font-semibold">
-            🎥 No movies found. Try a different search.
+            <i class="fa-solid fa-clapperboard text-orange-600 "></i> No movies
+            found. Try a different search.
           </h1>
         </div>
       )}

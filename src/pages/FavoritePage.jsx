@@ -9,8 +9,8 @@ const Favorites = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex flex-col justify-center bg-black text-white">
-        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold py-5 flex gap-3 justify-center items-center">
+      <div className="min-h-screen text-white flex flex-col items-center gap-3 justify-center py-20 lg:py-14 lg:px-20">
+        <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold flex gap-3 justify-center items-center pt-3 md:pt-5">
           <i class="fa-solid fa-clapperboard text-orange-600 "></i> Favorite
           Movies
         </h1>
