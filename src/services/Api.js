@@ -37,3 +37,19 @@ export async function getTopRatedMovies() {
   const data = await response.json();
   return data;
 }
+
+export async function getGenre() {
+  const response = await fetch(
+    `https://express-api-two-taupe.vercel.app/api/v1/movies/genres`
+  );
+  const data = await response.json();
+  return data;
+}
+
+export async function getGenreById(id) {
+  const response = await fetch(
+    `https://express-api-two-taupe.vercel.app/api/v1/movies/genres/${id}`
+  );
+  const data = await response.json();
+  return data;
+}

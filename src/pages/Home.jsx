@@ -3,6 +3,7 @@ import { searchMovies, getNowPlaying } from "../services/Api";
 import { useEffect, useState } from "react";
 import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
+import Genre from "../components/Genre";
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -66,15 +67,18 @@ function Home() {
       ) : (
         <>
           <LandingPage randomImage={randomImage} />
+          <div className="flex pt-10">
+            <Genre />
+          </div>
           <div
             id="moviesSection"
             className="container-fluid position-relative"
             style={{ background: "black" }}
           >
-            <div className="flex justify-center py-5">
+            <div className="flex justify-center pt-4 pb-3 sticky top-14 bg-black z-10">
               <form
-                className="flex flex-wrap gap-2 items-center justify-center"
-                onSubmit={handleInput}
+                className="flex flex-wrap gap-2 items-stretch justify-center"
+                onSubmit={(e) => e.preventDefault()} // Prevent page refresh
               >
                 <input
                   type="text"
