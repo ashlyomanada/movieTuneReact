@@ -13,14 +13,18 @@ const Episodes = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const fetchEpisodes = async () => {
+    setIsLoading(true);
     try {
       const response = await getEpisodes(id, seasonNumber);
       setSeasonName(response.name);
       setCurSeason(response.season_number);
-      console.log("episodes:", response.episodes);
+      //   console.log("episodes:", response.episodes);
       setShowEpisodes(response.episodes);
     } catch (error) {
       console.error("Error fetching episodes:", error);
+      setIsLoading(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -33,7 +37,7 @@ const Episodes = () => {
       if (response.seasons && response.seasons.length > seasonIndex) {
         const episodesData = response.seasons[seasonIndex]?.episodes || [];
         setDetails(episodesData);
-        console.log("Fetched Details:", episodesData);
+        // console.log("Fetched Details:", episodesData);
       } else {
         console.error("Invalid season number or no data available.");
         setDetails([]);
@@ -51,7 +55,7 @@ const Episodes = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-start px-20 py-10 bg-black gap-3 text-white">
+    <div className="min-h-screen flex flex-col items-start px-3  md:px-10 lg:px-20 py-10 bg-black gap-3 text-white">
       <div className="flex sticky top-0 bg-black py-3 justify-between items-center w-full">
         <h3>
           Season {curSeason} :{" "}
@@ -64,8 +68,12 @@ const Episodes = () => {
           Back
         </button>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pb-20">
-        {showEpisodes.length > 0 ? (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pb-20">
+        {isLoading ? (
+          <div id="loaderSection" className="loader-container">
+            <div className="loader"></div>
+          </div>
+        ) : showEpisodes.length > 0 ? (
           showEpisodes.map((episode, index) => {
             const detail = details.find(
               (detail) => detail.episode === episode.episode_number
