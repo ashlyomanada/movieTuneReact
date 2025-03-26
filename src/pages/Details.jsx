@@ -71,12 +71,13 @@ const Details = () => {
             <div className="flex gap-3 flex-wrap">
               {details.genres.length > 0 &&
                 details.genres.map((genre) => (
-                  <button
+                  <Link
+                    to={`/movies/genre/${genre.id}`}
                     key={genre.id}
-                    className="bg-[#1f1f1f] py-2 px-3 rounded-full"
+                    className="bg-[#1f1f1f] py-2 px-3 rounded-full text-white no-underline"
                   >
                     {genre.name}
-                  </button>
+                  </Link>
                 ))}
             </div>
 

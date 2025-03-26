@@ -41,7 +41,7 @@ const GenrePage = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen text-white flex flex-col items-center justify-center py-20 lg:py-14 lg:px-20">
+      <div className="min-h-screen text-white flex flex-col items-center justify-center py-20 lg:py-14 lg:px-20 bg-black">
         {loading ? (
           <div id="loaderSection" className="loader-container">
             <div className="loader"></div>

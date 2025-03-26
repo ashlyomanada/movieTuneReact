@@ -25,7 +25,7 @@ const Popular = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen text-white flex flex-col items-center justify-center py-20 lg:py-14 lg:px-20">
+      <div className="min-h-screen text-white flex flex-col items-center justify-center py-20 lg:py-14 lg:px-20 bg-black">
         {loading ? (
           <div id="loaderSection" className="loader-container">
             <div className="loader"></div>
@@ -33,7 +33,8 @@ const Popular = () => {
         ) : (
           <div className="flex flex-col items-center gap-4 pt-3 md:pt-5 ">
             <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-3 items-center lg:pt-5">
-              <i class="fa-solid fa-fire text-orange-600"></i> Popular Movies
+              <i className="fa-solid fa-fire text-orange-600"></i> Popular
+              Movies
             </h1>
             <Card movies={popularMovies} />
           </div>

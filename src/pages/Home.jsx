@@ -1,9 +1,10 @@
-import MovieCard from "../components/MovieCard";
+import Card from "../components/Card";
 import { searchMovies, getNowPlaying } from "../services/Api";
 import { useEffect, useState } from "react";
 import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
 import Genre from "../components/Genre";
+import { useToggleContext } from "../context/ToggleContext";
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -13,6 +14,7 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const { isNavShow } = useToggleContext();
 
   useEffect(() => {
     const getMovies = async () => {
@@ -20,7 +22,7 @@ function Home() {
         const response = await getNowPlaying();
         setMovies(response);
         setTrendingMovies(response);
-        const first3Movies = response.slice(0, 3);
+        const first3Movies = response.slice(0, 10);
         setRandomImage(first3Movies);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
@@ -67,18 +69,22 @@ function Home() {
       ) : (
         <>
           <LandingPage randomImage={randomImage} />
-          <div className="flex pt-10">
+          <div className="flex pt-10 bg-black">
             <Genre />
           </div>
           <div
             id="moviesSection"
-            className="container-fluid position-relative"
+            className="container-fluid"
             style={{ background: "black" }}
           >
-            <div className="flex justify-center pt-4 pb-3 sticky top-14 bg-black z-10">
+            <div
+              className={`${
+                isNavShow ? "flex" : "hidden"
+              }  justify-center pt-4 pb-3 sticky top-14 bg-black z-10`}
+            >
               <form
                 className="flex flex-wrap gap-2 items-stretch justify-center"
-                onSubmit={(e) => e.preventDefault()} // Prevent page refresh
+                onSubmit={(e) => e.preventDefault()}
               >
                 <input
                   type="text"
@@ -105,16 +111,12 @@ function Home() {
               ) : (
                 <h1 className="text-xl sm:text-2xl md:text-3xl flex gap-2 items-center text-white lg:pb-4">
                   <i className="fa-solid fa-fire-flame-curved text-orange-600"></i>
-                  Popular Movies
+                  Now Playing
                 </h1>
               )}
             </div>
 
-            <MovieCard
-              movies={movies}
-              isSearch={isSearch}
-              searchQuery={searchQuery}
-            />
+            <Card movies={movies} />
           </div>
         </>
       )}

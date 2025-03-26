@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFavoritesContext } from "../context/FavoritesContext";
 
-const Card = ({ movies }) => {
+const TvCard = ({ tvShows }) => {
   const [imageLoad, setImageLoad] = useState({});
 
   const { favorites, addToFavorites, removeFromFavorites } =
@@ -16,15 +16,15 @@ const Card = ({ movies }) => {
 
   return (
     <div className="container mx-auto px-3 ">
-      {movies && movies.length > 0 ? (
+      {tvShows && tvShows.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 place-items-center">
-          {movies.map((movie, index) => (
+          {tvShows.map((movie, index) => (
             <div
               className="flex flex-col gap-2 w-full relative "
               key={`${movie.id}-${index}`}
             >
               <Link
-                to={`/movies/details/${movie.id}`}
+                to={`/tvShows/details/${movie.id}`}
                 className="flex justify-center items-stretch relative group"
               >
                 {!imageLoad[movie.id] && (
@@ -59,7 +59,7 @@ const Card = ({ movies }) => {
 
               <div className="text-center flex flex-col items-center justify-center min-h-20">
                 <h5 className="title text-white text-sm md:text-base lg:text-lg">
-                  {movie.title}
+                  {movie.name}
                 </h5>
               </div>
             </div>
@@ -68,8 +68,8 @@ const Card = ({ movies }) => {
       ) : (
         <div className="flex justify-center items-center h-screen w-full">
           <h1 className="text-white text-xl md:text-2xl lg:text-3xl font-semibold">
-            <i className="fa-solid fa-clapperboard text-orange-600 "></i> No
-            movies found. Try a different search.
+            <i className="fa-solid fa-clapperboard text-orange-600 "></i> No TV
+            Shows found. Try a different search.
           </h1>
         </div>
       )}
@@ -77,4 +77,4 @@ const Card = ({ movies }) => {
   );
 };
 
-export default Card;
+export default TvCard;

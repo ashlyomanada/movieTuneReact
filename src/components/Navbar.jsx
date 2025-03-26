@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useToggleContext } from "../context/ToggleContext";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false); // Fixed typo from 'setIsIcrolled' to 'setIsScrolled'
-  const [isNavShow, setIsNavShow] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { isNavShow, toggleLink, toggleNav } = useToggleContext();
   const location = useLocation();
-
-  const toggleNav = () => {
-    setIsNavShow(!isNavShow);
-  };
-
-  const toggleLink = () => {
-    setIsNavShow(true);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +36,7 @@ const Navbar = () => {
         }}
       >
         <div className="logo-container">
-          <h5>MovieTune</h5>
+          <h5 style={{ textShadow: "2px 2px 4px #000" }}>MovieTune</h5>
         </div>
 
         <ul
@@ -61,6 +54,7 @@ const Navbar = () => {
               } anchor border-orange-600 `}
               to="/"
               onClick={() => toggleLink()}
+              style={{ textShadow: "2px 2px 4px #000" }}
             >
               Home
             </Link>
@@ -72,6 +66,7 @@ const Navbar = () => {
               } anchor border-orange-600 `}
               to="/movies/popular"
               onClick={() => toggleLink()}
+              style={{ textShadow: "2px 2px 4px #000" }}
             >
               Popular
             </Link>
@@ -83,8 +78,21 @@ const Navbar = () => {
               } anchor border-orange-600 `}
               to="/movies/top-rated"
               onClick={() => toggleLink()}
+              style={{ textShadow: "2px 2px 4px #000" }}
             >
               Movies
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={`${
+                location.pathname === "/movies/tv-shows" ? "border-b-4" : " "
+              } anchor border-orange-600 `}
+              to="/movies/tv-shows"
+              onClick={() => toggleLink()}
+              style={{ textShadow: "2px 2px 4px #000" }}
+            >
+              TV Shows
             </Link>
           </li>
           <li>
@@ -94,13 +102,18 @@ const Navbar = () => {
               } anchor border-orange-600 `}
               to="/movies/favorites"
               onClick={() => toggleLink()}
+              style={{ textShadow: "2px 2px 4px #000" }}
             >
               Favorites
             </Link>
           </li>
         </ul>
 
-        <button className="menuBtn" onClick={toggleNav}>
+        <button
+          className="menuBtn"
+          onClick={toggleNav}
+          style={{ textShadow: "2px 2px 4px #000" }}
+        >
           {isNavShow ? (
             <i className="fa-solid fa-bars"></i>
           ) : (

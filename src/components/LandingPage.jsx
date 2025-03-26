@@ -30,7 +30,13 @@ const LandingPage = ({ randomImage }) => {
                 style={{ transition: "transform 1s ease-in-out" }}
               >
                 <div className="movieInfo">
-                  <h1 className="text-3xl lg:text-4xl">{movie.title}</h1>
+                  <h1
+                    className="text-3xl lg:text-4xl"
+                    style={{ textShadow: "2px 2px 4px #000" }}
+                  >
+                    {movie.title}
+                  </h1>
+
                   <Link
                     to={`/movies/details/${movie.id}`}
                     className="signBtn no-underline"
