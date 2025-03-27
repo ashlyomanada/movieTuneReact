@@ -12,6 +12,7 @@ import TvShows from "./pages/TvShows";
 import ToggleContext from "./context/ToggleContext";
 import TvshowsDetails from "./pages/TvshowsDetails";
 import Episodes from "./components/Episodes";
+import LoaderProvider from "./context/LoaderContext";
 import Footer from "./components/Footer";
 
 function App() {
@@ -19,22 +20,24 @@ function App() {
     <>
       <Router>
         <ToggleContext>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies/popular" element={<Popular />} />
-            <Route path="/movies/top-rated" element={<Movies />} />
-            <Route path="/movies/tv-shows" element={<TvShows />} />
-            <Route path="/movies/details/:id" element={<Details />} />
-            <Route path="/movies/watch/:id/:server" element={<Watch />} />
-            <Route path="/movies/favorites" element={<FavoritePage />} />
-            <Route path="/movies/genre/:id" element={<GenrePage />} />
-            <Route path="/tvShows/details/:id" element={<TvshowsDetails />} />
-            <Route
-              path="/tvShows/:id/season/:seasonNumber/episodes"
-              element={<Episodes />}
-            />
-          </Routes>
-          {/* <Footer /> */}
+          <LoaderProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/movies/popular" element={<Popular />} />
+              <Route path="/movies/top-rated" element={<Movies />} />
+              <Route path="/movies/tv-shows" element={<TvShows />} />
+              <Route path="/movies/details/:id" element={<Details />} />
+              <Route path="/movies/watch/:id/:server" element={<Watch />} />
+              <Route path="/movies/favorites" element={<FavoritePage />} />
+              <Route path="/movies/genre/:id" element={<GenrePage />} />
+              <Route path="/tvShows/details/:id" element={<TvshowsDetails />} />
+              <Route
+                path="/tvShows/:id/season/:seasonNumber/episodes"
+                element={<Episodes />}
+              />
+            </Routes>
+            {/* <Footer /> */}
+          </LoaderProvider>
         </ToggleContext>
       </Router>
     </>

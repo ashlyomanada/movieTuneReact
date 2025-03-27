@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useToggleContext } from "../context/ToggleContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isNavShow, toggleLink, toggleNav } = useToggleContext();
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,64 +47,84 @@ const Navbar = () => {
           }}
         >
           <li>
-            <Link
-              className={`${
-                location.pathname === "/" ? "border-b-4" : " "
-              } anchor border-orange-600 `}
+            <NavLink
               to="/"
+              className={({ isActive }) =>
+                `anchor ${
+                  isActive
+                    ? "border-b-4 border-orange-600"
+                    : "hover:border-orange-600"
+                }`
+              }
               onClick={() => toggleLink()}
               style={{ textShadow: "2px 2px 4px #000" }}
             >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              className={`${
-                location.pathname === "/movies/popular" ? "border-b-4" : " "
-              } anchor border-orange-600 `}
+            <NavLink
               to="/movies/popular"
+              className={({ isActive }) =>
+                `anchor ${
+                  isActive
+                    ? "border-b-4 border-orange-600"
+                    : "hover:border-orange-600"
+                }`
+              }
               onClick={() => toggleLink()}
               style={{ textShadow: "2px 2px 4px #000" }}
             >
               Popular
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              className={`${
-                location.pathname === "/movies/top-rated" ? "border-b-4" : " "
-              } anchor border-orange-600 `}
+            <NavLink
               to="/movies/top-rated"
+              className={({ isActive }) =>
+                `anchor ${
+                  isActive
+                    ? "border-b-4 border-orange-600"
+                    : "hover:border-orange-600"
+                }`
+              }
               onClick={() => toggleLink()}
               style={{ textShadow: "2px 2px 4px #000" }}
             >
               Movies
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              className={`${
-                location.pathname === "/movies/tv-shows" ? "border-b-4" : " "
-              } anchor border-orange-600 `}
+            <NavLink
               to="/movies/tv-shows"
+              className={({ isActive }) =>
+                `anchor ${
+                  isActive
+                    ? "border-b-4 border-orange-600"
+                    : "hover:border-orange-600"
+                }`
+              }
               onClick={() => toggleLink()}
               style={{ textShadow: "2px 2px 4px #000" }}
             >
               TV Shows
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              className={`${
-                location.pathname === "/movies/favorites" ? "border-b-4" : " "
-              } anchor border-orange-600 `}
+            <NavLink
               to="/movies/favorites"
+              className={({ isActive }) =>
+                `anchor ${
+                  isActive
+                    ? "border-b-4 border-orange-600"
+                    : "hover:border-orange-600"
+                }`
+              }
               onClick={() => toggleLink()}
               style={{ textShadow: "2px 2px 4px #000" }}
             >
               Favorites
-            </Link>
+            </NavLink>
           </li>
         </ul>
 

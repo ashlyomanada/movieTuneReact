@@ -65,7 +65,7 @@ const Watch = () => {
         className="z-50 absolute top-5 left-5 p-2 text-white text-2xl md:text-3xl lg:text-4xl"
         onClick={() => navigate(-1)}
       >
-        <i class="fa-solid fa-house"></i>
+        <i className="fa-solid fa-house"></i>
       </button>
     </div>
   );

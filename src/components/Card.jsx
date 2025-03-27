@@ -1,17 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useFavoritesContext } from "../context/FavoritesContext";
+import { useLoaderContext } from "../context/LoaderContext";
 
 const Card = ({ movies }) => {
   const [imageLoad, setImageLoad] = useState({});
 
   const { favorites, addToFavorites, removeFromFavorites } =
     useFavoritesContext();
+  const { setIsLoading } = useLoaderContext();
 
   const isFavorite = (movie) => favorites.some((fav) => fav.id === movie.id);
 
   const handleImageLoad = (id) => {
     setImageLoad((prev) => ({ ...prev, [id]: true }));
+  };
+  const location = useLocation();
+  const { id } = useParams();
+
+  const handleScrollTop = () => {
+    if (location.pathname == `/movies/details/${id}`) {
+      window.scrollTo(0, 0);
+      setIsLoading(true);
+    }
+    setIsLoading(true);
   };
 
   return (
@@ -26,6 +38,7 @@ const Card = ({ movies }) => {
               <Link
                 to={`/movies/details/${movie.id}`}
                 className="flex justify-center items-stretch relative group"
+                onClick={handleScrollTop}
               >
                 {!imageLoad[movie.id] && (
                   <div className="skeleton aspect-[2/3] w-full bg-gray-300 animate-pulse"></div>
@@ -66,10 +79,10 @@ const Card = ({ movies }) => {
           ))}
         </div>
       ) : (
-        <div className="flex justify-center items-center h-screen w-full">
+        <div className="flex justify-center items-center w-full">
           <h1 className="text-white text-xl md:text-2xl lg:text-3xl font-semibold">
             <i className="fa-solid fa-clapperboard text-orange-600 "></i> No
-            movies found. Try a different search.
+            movies found.
           </h1>
         </div>
       )}
