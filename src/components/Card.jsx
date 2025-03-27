@@ -5,18 +5,16 @@ import { useLoaderContext } from "../context/LoaderContext";
 
 const Card = ({ movies }) => {
   const [imageLoad, setImageLoad] = useState({});
-
+  const location = useLocation();
+  const { id } = useParams();
   const { favorites, addToFavorites, removeFromFavorites } =
     useFavoritesContext();
   const { setIsLoading } = useLoaderContext();
-
   const isFavorite = (movie) => favorites.some((fav) => fav.id === movie.id);
 
   const handleImageLoad = (id) => {
     setImageLoad((prev) => ({ ...prev, [id]: true }));
   };
-  const location = useLocation();
-  const { id } = useParams();
 
   const handleScrollTop = () => {
     if (location.pathname == `/movies/details/${id}`) {

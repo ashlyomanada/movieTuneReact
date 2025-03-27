@@ -11,7 +11,7 @@ export const getEpisodes = async (tv_id, season_number) => {
 // Get Movie Credits (Cast and Crew Only)
 export const getMovieCasts = async (id) => {
   const response =
-    await fetch(`GET https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}
+    await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}
 `);
   const data = await response.json();
   return data;
@@ -41,5 +41,24 @@ export const getRecommendations = async (id) => {
     `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${APIKEY}`
   );
   const data = response.json();
+  return data;
+};
+
+// Get Cast details
+export const getCastDetails = async () => {
+  const response =
+    await fetch(`https://api.themoviedb.org/3/person/{person_id}?api_key={api_key}&language=en-US
+`);
+  const data = await response.json();
+  return data;
+};
+
+// Get Cast Movies
+export const getCastMovies = async () => {
+  const response =
+    await fetch(`https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key={api_key}&language=en-US
+
+`);
+  const data = await response.json();
   return data;
 };
